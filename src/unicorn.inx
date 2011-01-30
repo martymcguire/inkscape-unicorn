@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <_name>MakerBot Unicorn G-Code Output</_name>
+  <id>com.makerbot.unicorn.gcode</id>
+  <dependency type="extension">org.inkscape.output.svg.inkscape</dependency>
+  <dependency type="executable" location="extensions">unicorn.py</dependency>
+  <dependency type="executable" location="extensions">inkex.py</dependency>
+  <param name="pen-up-angle" type="float" min="0.0" max="180.0" _gui-text="Pen Up Angle">50</param>
+  <param name="pen-down-angle" type="float" min="0.0" max="180.0" _gui-text="Pen Down Angle">30</param>
+  <param name="start-delay" type="float" min="0.0" max="1000.0" _gui-text="Delay after pen-down command before movement in milliseconds.">50.0</param>
+  <param name="stop-delay" type="float" min="0.0" max="1000.0" _gui-text="Delay after pen-up command before movement in milliseconds.">150.0</param>
+  <param name="xy-feedrate" type="float" min="100.0" max="5000.0" _gui-text="XY axes feedrate in mm/min.">3500.0</param>
+  <param name="z-feedrate" type="float" min="0.0" max="1000.0" _gui-text="Z-axis feedrate in mm/min.">150.0</param>
+  <param name="z-height" type="float" min="0.0" max="110.0" _gui-text="Z-axis print height in mm.">0.0</param>
+  <param name="finished-height" type="float" min="0.0" max="110.0" _gui-text="Z-axis height after printing in mm.">15.0</param>
+
+  <output>
+    <extension>.gcode</extension>
+    <mimetype>application/x-gcode</mimetype>
+    <_filetypename>MakerBot Unicorn G-Code (*.gcode)</_filetypename>
+    <_filetypetooltip>Toolpath for the MakerBot Unicorn Pen Plotter</_filetypetooltip>
+    <dataloss>true</dataloss>
+  </output>
+  <script>
+    <command reldir="extensions" interpreter="python">unicorn.py</command>
+  </script>
+</inkscape-extension>
