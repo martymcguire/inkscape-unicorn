@@ -36,7 +36,7 @@ class MyEffect(inkex.Effect):
                       help="Pen Down Angle")
     self.OptionParser.add_option("--start-delay",
                       action="store", type="float",
-                      dest="start_delay", default="50.0",
+                      dest="start_delay", default="150.0",
                       help="Delay after pen down command before movement in milliseconds")
     self.OptionParser.add_option("--stop-delay",
                       action="store", type="float",
@@ -56,7 +56,7 @@ class MyEffect(inkex.Effect):
                       help="Z axis print height in mm")
     self.OptionParser.add_option("--finished-height",
                       action="store", type="float",
-                      dest="finished_height", default="15.0",
+                      dest="finished_height", default="0.0",
                       help="Z axis height after printing in mm")
 
   def output(self):
