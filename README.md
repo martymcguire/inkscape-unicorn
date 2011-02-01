@@ -12,6 +12,7 @@ Credits
 =======
 
 * Marty McGuire pulled this all together into an Inkscape extension.
+* [Inkscape](http://www.inkscape.org/) is an awesome open source vector graphics app.
 * [Scribbles](https://github.com/makerbot/Makerbot/tree/master/Unicorn/Scribbles%20Scripts) is the original DXF-to-Unicorn Python script.
 * [The Egg-Bot Driver for Inkscape](http://code.google.com/p/eggbotcode/) provided inspiration and good examples for working with Inkscape's extensions API.
 
@@ -52,6 +53,7 @@ Usage
 TODOs
 =====
 
+* Rename `*PolyLine` stuff to `*Path` to be less misleading.
 * Add support for [mifga's pen registration and page-changing G-Code](http://www.thingiverse.com/thing:4262).
 * Parameterize smoothness for curve approximation.
 * Use native curve G-Codes instead of converting to paths?
