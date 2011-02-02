@@ -5,14 +5,45 @@
   <dependency type="extension">org.inkscape.output.svg.inkscape</dependency>
   <dependency type="executable" location="extensions">unicorn.py</dependency>
   <dependency type="executable" location="extensions">inkex.py</dependency>
-  <param name="pen-up-angle" type="float" min="0.0" max="180.0" _gui-text="Pen Up Angle">50</param>
-  <param name="pen-down-angle" type="float" min="0.0" max="180.0" _gui-text="Pen Down Angle">30</param>
-  <param name="start-delay" type="float" min="0.0" max="1000.0" _gui-text="Delay after pen-down command before movement in milliseconds.">150.0</param>
-  <param name="stop-delay" type="float" min="0.0" max="1000.0" _gui-text="Delay after pen-up command before movement in milliseconds.">150.0</param>
-  <param name="xy-feedrate" type="float" min="100.0" max="5000.0" _gui-text="XY axes feedrate in mm/min.">3500.0</param>
-  <param name="z-feedrate" type="float" min="0.0" max="1000.0" _gui-text="Z-axis feedrate in mm/min.">150.0</param>
-  <param name="z-height" type="float" min="0.0" max="110.0" _gui-text="Z-axis print height in mm.">0.0</param>
-  <param name="finished-height" type="float" min="0.0" max="110.0" _gui-text="Z-axis height after printing in mm.">0.0</param>
+  <param name="tab" type="notebook">
+    <page name="plotter_setup" _gui-text="Setup">
+      <param name="pen-up-angle" type="float" min="0.0" max="180.0" _gui-text="Pen Up Angle">50</param>
+      <param name="pen-down-angle" type="float" min="0.0" max="180.0" _gui-text="Pen Down Angle">30</param>
+      <param name="start-delay" type="float" min="0.0" max="1000.0" _gui-text="Delay after pen-down command before movement in milliseconds.">150.0</param>
+      <param name="stop-delay" type="float" min="0.0" max="1000.0" _gui-text="Delay after pen-up command before movement in milliseconds.">150.0</param>
+      <param name="xy-feedrate" type="float" min="100.0" max="5000.0" _gui-text="XY axes feedrate in mm/min.">3500.0</param>
+      <param name="z-feedrate" type="float" min="0.0" max="1000.0" _gui-text="Z-axis feedrate in mm/min.">150.0</param>
+      <param name="z-height" type="float" min="0.0" max="110.0" _gui-text="Z-axis print height in mm.">0.0</param>
+      <param name="finished-height" type="float" min="0.0" max="110.0" _gui-text="Z-axis height after printing in mm.">0.0</param>
+    </page>
+    <page name="pen_reg" _gui-text="Registration">
+      <_param name="reg_help" type="description" xml:space="preserve">Pen Registration Check
+
+This feature adds a quick pen-down/pen-up at the beginning of a plot so you can check whether the pen hits the paper.
+
+When plotting, ReplicatorG will pause to ask if registration was successful. If you say "No", it will simply abort the plot so you can restart.</_param>
+      <param name="register-pen" type="boolean" _gui-text="Use Pen Registration Check">true</param>
+    </page>
+    <page name="homing" _gui-text="Homing">
+      <_param name="homing_help" type="description" xml:space="preserve">Where do you like to set your platform when you start a plot?
+
+Some examples:
+- X = 0, Y = 0 if it starts centered under the pen.
+- X = 50, Y = 50 if it starts in the front-left corner of a Cupcake CNC.
+
+Note: Double-check the orientation of your axes when changing these values!</_param>
+      <param name="x-home" type="float" min="-100.00" max="100.00" _gui-text="Pen starts at X value:">0.00</param>
+      <param name="y-home" type="float" min="-100.00" max="100.00" _gui-text="Pen starts at Y value:">0.00</param>
+    </page>
+    <page name="help" _gui-text="Help">
+      <_param name="ext_help" type="description" xml:space="preserve">MakerBot Unicorn G-Code Output.
+
+- All text must be converted to paths.
+- Curves are approximated with line segments.
+
+More Info: http://github.com/martymcguire/inkscape-unicorn/</_param>
+    </page>
+  </param>
 
   <output>
     <extension>.gcode</extension>

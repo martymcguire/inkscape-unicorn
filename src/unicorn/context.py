@@ -2,7 +2,7 @@ from math import *
 import sys
 
 class GCodeContext:
-    def __init__(self, xy_feedrate, z_feedrate, start_delay, stop_delay, pen_up_angle, pen_down_angle, z_height, finished_height, file):
+    def __init__(self, xy_feedrate, z_feedrate, start_delay, stop_delay, pen_up_angle, pen_down_angle, z_height, finished_height, x_home, y_home, register_pen, file):
       self.xy_feedrate = xy_feedrate
       self.z_feedrate = z_feedrate
       self.start_delay = start_delay
@@ -11,6 +11,9 @@ class GCodeContext:
       self.pen_down_angle = pen_down_angle
       self.z_height = z_height
       self.finished_height = finished_height
+      self.x_home = x_home
+      self.y_home = y_home
+      self.register_pen = register_pen
       self.file = file
       
       self.drawing = False
@@ -21,8 +24,7 @@ class GCodeContext:
         "( %s )" % " ".join(sys.argv),
         "G21 (metric ftw)",
         "G90 (absolute mode)",
-        "G92 X0 Y0 Z0 (zero all axes)",
-        "G92 Z%0.2F F%0.2F (go to printing level)" % (self.z_height, self.z_feedrate),
+        "G92 X%.2f Y%.2f Z%.2f (you are here)" % (self.x_home, self.y_home, self.z_height),
         ""
       ]
 
@@ -33,16 +35,31 @@ class GCodeContext:
 				"G4 P%d (wait %dms)" % (self.stop_delay, self.stop_delay),
 				"M300 S255 (turn off servo)",
 				"G1 X0 Y0 F%0.2F" % self.xy_feedrate,
-        # FIXME - parameterize z finished height
 				"G1 Z%0.2F F%0.2F (go up to finished level)" % (self.finished_height, self.z_feedrate),
-				"G1 X0 Y0 F%0.2F (go back to center)" % self.z_feedrate,
+				"G1 X%0.2F Y%0.2F F%0.2F (go home)" % (self.x_home, self.y_home, self.xy_feedrate),
 				"M18 (drives off)",
+      ]
+
+      self.registration = [
+        "M300 S%d (pen down)" % (self.pen_down_angle),
+        "G4 P%d (wait %dms)" % (self.start_delay, self.start_delay),
+        "M300 S%d (pen up)" % (self.pen_up_angle),
+        "G4 P%d (wait %dms)" % (self.stop_delay, self.stop_delay),
+        "M18 (disengage drives)",
+        "M01 (Was registration test successful?)",
+        "M17 (engage drives if YES, and continue)",
+        ""
       ]
 
       self.codes = []
 
     def generate(self):
-      for codeset in [self.preamble, self.codes, self.postscript]:
+      codesets = [self.preamble]
+      if self.register_pen == 'true':
+        codesets.append(self.registration)
+      codesets.append(self.codes)
+      codesets.append(self.postscript)
+      for codeset in codesets:
         for line in codeset:
           print line
 
