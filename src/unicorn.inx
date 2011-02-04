@@ -35,6 +35,11 @@ Note: Double-check the orientation of your axes when changing these values!</_pa
       <param name="x-home" type="float" min="-100.00" max="100.00" _gui-text="Pen starts at X value:">0.00</param>
       <param name="y-home" type="float" min="-100.00" max="100.00" _gui-text="Pen starts at Y value:">0.00</param>
     </page>
+    <page name="copies" _gui-text="Copies">
+      <_param name="copies_help" type="description" xml:space="preserve">Add page-changing prompts so you can plot multiple copies!</_param>
+      <param name="num-copies" type="int" min="1" _gui-text="Number of copies">1</param>
+      <param name="continuous" type="boolean" _gui-text="Plot continuously? (Experimental. Ignores # of copies value above.)">false</param>
+    </page>
     <page name="help" _gui-text="Help">
       <_param name="ext_help" type="description" xml:space="preserve">MakerBot Unicorn G-Code Output.
 

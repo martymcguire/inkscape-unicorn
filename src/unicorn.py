@@ -70,6 +70,13 @@ class MyEffect(inkex.Effect):
                       action="store", type="float",
                       dest="y_home", default="0.0",
                       help="Starting Y position")
+    self.OptionParser.add_option("--num-copies",
+                      action="store", type="int",
+                      dest="num_copies", default="1")
+    self.OptionParser.add_option("--continuous",
+                      action="store", type="string",
+                      dest="continuous", default="false",
+                      help="Plot continuously until stopped.")
     self.OptionParser.add_option("--tab",
                       action="store", type="string",
                       dest="tab")
@@ -84,6 +91,8 @@ class MyEffect(inkex.Effect):
                            self.options.z_height, self.options.finished_height,
                            self.options.x_home, self.options.y_home,
                            self.options.register_pen,
+                           self.options.num_copies,
+                           self.options.continuous,
                            self.svg_file)
     parser = SvgParser(self.document.getroot())
     parser.parse()
