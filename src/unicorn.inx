@@ -40,6 +40,9 @@ Note: Double-check the orientation of your axes when changing these values!</_pa
       <param name="num-copies" type="int" min="1" _gui-text="Number of copies">1</param>
       <param name="continuous" type="boolean" _gui-text="Plot continuously? (Experimental. Ignores # of copies value above.)">false</param>
     </page>
+    <page name="pen_changes" _gui-text="Pen Changes">
+      <param name="pause-on-layer-change" type="boolean" _gui-text="Pause on layer changes?">false</param>
+    </page>
     <page name="help" _gui-text="Help">
       <_param name="ext_help" type="description" xml:space="preserve">MakerBot Unicorn G-Code Output.
 
