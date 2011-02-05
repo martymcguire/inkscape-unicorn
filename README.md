@@ -54,7 +54,7 @@ TODOs
 =====
 
 * Rename `*PolyLine` stuff to `*Path` to be less misleading.
-* Add support for [mifga's pen registration and page-changing G-Code](http://www.thingiverse.com/thing:4262).
+* Formalize "home" to be a reasonable place to change pages/pens.
 * Parameterize smoothness for curve approximation.
 * Use native curve G-Codes instead of converting to paths?
 * Include example templates?
