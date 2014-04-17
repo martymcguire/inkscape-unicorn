@@ -74,15 +74,16 @@ class PolyLine(Entity):
 
 	def get_gcode(self,context):
 		"Emit gcode for drawing polyline"
-		for points in self.segments:
-			start = points[0]
-
-			context.codes.append("(" + str(self) + ")")
-			context.go_to_point(start[0],start[1])
-			context.start()
-			for point in points[1:]:
-				context.draw_to_point(point[0],point[1])
-				context.last = point
-			context.stop()
-			context.codes.append("")
+		if hasattr(self, 'segments'):
+			for points in self.segments:
+				start = points[0]
+	
+				context.codes.append("(" + str(self) + ")")
+				context.go_to_point(start[0],start[1])
+				context.start()
+				for point in points[1:]:
+					context.draw_to_point(point[0],point[1])
+					context.last = point
+				context.stop()
+				context.codes.append("")
 
